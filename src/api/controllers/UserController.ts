@@ -1,22 +1,25 @@
 import {
-    Authorized, Body, Delete, Get, JsonController, OnUndefined, Param, Post, Put, Req
+    Body, Controller, Delete, Get, HttpError, OnUndefined, Param, Post, Put, Req
 } from 'routing-controllers';
 
+import { Logger, LoggerInterface } from '../../decorators/Logger';
 import { UserNotFoundError } from '../errors/UserNotFoundError';
 import { User } from '../models/User';
 import { UserService } from '../services/UserService';
 
-@Authorized()
-@JsonController('/users')
+// @Authorized()
+@Controller('/users')
 export class UserController {
 
     constructor(
-        private userService: UserService
+        private userService: UserService,
+        @Logger(__filename) private logger: LoggerInterface
     ) { }
 
     @Get()
-    public find(): Promise<User[]> {
-        return this.userService.find();
+    public find(): HttpError {
+        this.logger.info('Teste');
+        throw new HttpError(404, 'teste');
     }
 
     @Get('/me')
@@ -32,6 +35,7 @@ export class UserController {
 
     @Post()
     public create(@Body() user: User): Promise<User> {
+        console.log(user);
         return this.userService.create(user);
     }
 

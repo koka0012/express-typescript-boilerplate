@@ -17,8 +17,6 @@
             "env": {
                 "NODE_ENV": "production"
             }
-<<<<<<< HEAD
-=======
         },
         {
             "type": "node",
@@ -26,7 +24,6 @@
             "name": "Nodemon Debug",
             "port": 9229,
             "restart": true
->>>>>>> dev/develop
         }
     ]
 }
